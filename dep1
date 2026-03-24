@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app-deployment1
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: varam
+  template:
+    metadata:
+      labels:
+        app: varam
+    spec:
+      containers:
+      - name: varam
+        image: varsha0411/myapp:v1
+        ports:
+        - containerPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: app-service1
+spec:
+  selector:
+    app: varam
+  ports:
+  - port: 80
+    targetPort: 8080
